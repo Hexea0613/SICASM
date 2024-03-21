@@ -1,0 +1,45 @@
+1000: COPY   START  1000    
+1000: EOF    BYTE   C'EOF'  
+1003: THREE  WORD   3       
+1006: ZERO   WORD   0       
+1009: RETADR RESW   1       
+100c: LENGTH RESW   1       
+100f: BUFFER RESB   4096    
+200f: FIRST  STL    RETADR  
+2012: CLOOP  JSUB   RDREC   
+2015:        LDA    LENGTH  
+2018:        COMP   ZERO    
+201b:        JEQ    ENDFIL  
+201e:        JSUB   WRREC   
+2021:        J      CLOOP   
+2024: ENDFIL LDA    EOF     
+2027:        STA    BUFFER  
+202a:        LDA    THREE   
+202d:        STA    LENGTH  
+2030:        JSUB   WRREC   
+2033:        LDL    RETADR  
+2036:        RSUB           
+2039: INPUT  BYTE   X'F1'   
+203a: MAXLEN WORD   4096    
+203d: RDREC  LDX    ZERO    
+2040:        LDA    ZERO    
+2043: RLOOP  TD     INPUT   
+2046:        JEQ    RLOOP   
+2049:        RD     INPUT   
+204c:        COMP   ZERO    
+204f:        JEQ    EXIT    
+2052:        STCH   BUFFER,X
+2055:        TIX    MAXLEN  
+2058:        JLT    RLOOP   
+205b: EXIT   STX    LENGTH  
+205e:        RSUB           
+2061: OUTPUT BYTE   X'05'   
+2062: WRREC  LDX    ZERO    
+2065: WLOOP  TD     OUTPUT  
+2068:        JEQ    WLOOP   
+206b:        LDCH   BUFFER,X
+206e:        WD     OUTPUT  
+2071:        TIX    LENGTH  
+2074:        JLT    WLOOP   
+2077:        RSUB           
+207a:        END    FIRST   

@@ -1,0 +1,5 @@
+﻿  SICASM.cpp
+D:\Program\SICASM\SICASM\SICASM.cpp(343,25): warning C4018: '<': signed/unsigned 不相符
+D:\Program\SICASM\SICASM\SICASM.cpp(383,24): warning C4018: '<': signed/unsigned 不相符
+D:\Program\SICASM\SICASM\SICASM.cpp(675,20): warning C4018: '<': signed/unsigned 不相符
+  SICASM.vcxproj -> D:\Program\SICASM\Debug\SICASM.exe
